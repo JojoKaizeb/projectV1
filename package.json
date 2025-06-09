@@ -1,0 +1,13 @@
+{
+  "name": "whatsapp-bot-pow",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.0",
+    "dotenv": "^16.0.3"
+  }
+}
