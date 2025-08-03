@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Product</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0f0f0f;
+      color: white;
+    }
+
+    .logo-top {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .logo-top img {
+      width: 60px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ffa500;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px #ff9800;
+    }
+
+    .product {
+      background-color: #1c1c1c;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 10px #222;
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .product:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px #ff9800;
+    }
+
+    .product-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 12px;
+      border: 2px solid #fff;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .product-name {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 5px;
+      text-shadow: 0 0 5px #ffbf00;
+    }
+
+    .product-price {
+      text-align: center;
+      font-size: 16px;
+      color: #00e676;
+      margin-bottom: 10px;
+    }
+
+    .product-desc {
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 10px;
+      color: #ccc;
+    }
+
+    .product-warning {
+      font-size: 13px;
+      color: #f44336;
+      text-align: center;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .product-warning.active {
+      text-shadow: 0 0 10px red;
+      color: #ff0000;
+    }
+
+    .order-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: #00c853;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .order-btn:hover {
+      background: #00e676;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 15px;
+      background: #444;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    @media screen and (max-width: 600px) {
+      .product {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo-top">
+    <img src="https://cdn-icons-png.flaticon.com/512/263/263115.png" alt="Shop Logo" />
+  </div>
+
+  <h1>My Product</h1>
+
+  <!-- ==== 7 PRODUK ==== -->
+  <!-- COPY DAN EDIT TIAP BAGIAN SESUAI NAMA PRODUK / DESKRIPSI / HARGA -->
+  <div class="product" onclick="toggleWarning(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Anonymous_emblem.svg" class="product-logo" alt="Logo">
+    <div class="product-name">Murbug(Murid Bug)</div>
+    <div class="product-price">Rp 25.000</div>
+    <div class="product-desc">Bug Sepuasnya Tanpa Batas Kecuali Bot Kenon.</div>
+    <div class="product-warning">⚠️ Warning: Gunakan dengan bijak!</div>
+    <button class="order-btn" onclick="orderNow(event, 'Produk 1')">Order Now</button>
+  </div>
+
+  <div class="product" onclick="toggleWarning(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Anonymous_emblem.svg" class="product-logo" alt="Logo">
+    <div class="product-name">Jasa Bug(Jasbug)</div>
+    <div class="product-price">Rp 3.000</div>
+    <div class="product-desc">Jasa Bug,Dimana Pembeli Bisa Mengirim Bug Satuan Ke Target.</div>
+    <div class="product-warning">⚠️ Warning: Gunakan Dengan Resiko Tanggung Sendiri!</div>
+    <button class="order-btn" onclick="orderNow(event, 'Produk 2')">Order Now</button>
+  </div>
+
+  <div class="product" onclick="toggleWarning(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Anonymous_emblem.svg" class="product-logo" alt="Logo">
+    <div class="product-name">Murband(Murid Band)</div>
+    <div class="product-price">Rp 50.000</div>
+    <div class="product-desc">Diajarkan Cara Banned Whatsapp Target,Dapat App,Text,Metode Full Pengajaran Sampe Bisa.</div>
+    <div class="product-warning">⚠️ Warning: Jangan disalahgunakan!</div>
+    <button class="order-btn" onclick="orderNow(event, 'Produk 3')">Order Now</button>
+  </div>
+
+  <div class="product" onclick="toggleWarning(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Anonymous_emblem.svg" class="product-logo" alt="Logo">
+    <div class="product-name">Jasa Banned</div>
+    <div class="product-price">Rp 30.000</div>
+    <div class="product-desc">Jasa Banned Wa Dari Admin Dengan Akurasi 100% Terbanned.</div>
+    <div class="product-warning">⚠️ Warning: Risiko ditanggung pembeli!</div>
+    <button class="order-btn" onclick="orderNow(event, 'Produk 4')">Order Now</button>
+  </div>
+
+  <div class="product" onclick="toggleWarning(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Anonymous_emblem.svg" class="product-logo" alt="Logo">
+    <div class="product-name">Partner RaditX7 EXCLUSIVE!</div>
+    <div class="product-price">Rp 120.000</div>
+    <div class="product-desc">Dapet Full Pengajaran Banned,Bug,Ransomware,Malware,Phising,Osint Dan Hacking Lainnya</div>
+    <div class="product-warning">⚠️ Warning: Berbahaya Jika Disalah Gunakan!</div>
+    <button class="order-btn" onclick="orderNow(event, 'Produk 5')">Order Now</button>
+  </div>
+
+  <div class="product" onclick="toggleWarning(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Anonymous_emblem.svg" class="product-logo" alt="Logo">
+    <div class="product-name">Panel Pterodactyl</div>
+    <div class="product-price">Rp 1.000</div>
+    <div class="product-desc">Harga Dimulai Dari 1K Sampai 12K Alias 1GB-Unlimited</div>
+    <div class="product-warning">⚠️ Warning: Jangan Dipake Buat Pasang Script DDoS</div>
+    <button class="order-btn" onclick="orderNow(event, 'Produk 6')">Order Now</button>
+  </div>
+
+  <div class="product" onclick="toggleWarning(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Anonymous_emblem.svg" class="product-logo" alt="Logo">
+    <div class="product-name">Reseller Panel Pterodactyl</div>
+    <div class="product-price">Rp 35.000</div>
+    <div class="product-desc">Bisa Create Panel Dan Dijual Ulang,Bisa Balmod Asal Niat</div>
+    <div class="product-warning">⚠️ Warning: Tidak bisa direfund!</div>
+    <button class="order-btn" onclick="orderNow(event, 'Produk 7')">Order Now</button>
+  </div>
+
+  <a class="back-btn" href="index.html">Back To Main Menu</a>
+
+  <script>
+    function orderNow(event, productName) {
+      event.stopPropagation();
+      const phone = "6282240310279";
+      const message = encodeURIComponent(`Haloo RaditX7 Saya Ingin Membeli ${productName}`);
+      window.location.href = `https://wa.me/${phone}?text=${message}`;
+    }
+
+    function toggleWarning(element) {
+      const warning = element.querySelector('.product-warning');
+      warning.classList.toggle('active');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bahasa Favorit</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0d0d0d;
+      color: #ffd700;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    h1::before {
+      content: "</>";
+      font-weight: bold;
+      margin-right: 10px;
+      font-size: 26px;
+      color: #ffcc00;
+    }
+
+    .card {
+      background: #1c1c1c;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(255, 204, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card.active {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px 5px rgba(255, 165, 0, 0.7);
+    }
+
+    .card.active .language-title,
+    .card.active .stars,
+    .card.active .description {
+      text-shadow: 0 0 8px #ffa500, 0 0 16px #ffa500;
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .js    { background-color: #f7df1e; }
+    .py    { background-color: #306998; }
+    .php   { background-color: #8993be; }
+    .kt    { background-color: #f18e33; }
+    .cpp   { background-color: #00599C; }
+
+    .language-title {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    .stars {
+      font-size: 16px;
+      color: #ffdd55;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      font-size: 14px;
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 5px;
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    .btn-back {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 12px;
+      margin-top: 30px;
+      background-color: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: 0.2s ease;
+    }
+
+    .btn-back:hover {
+      background-color: #ffdb4d;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Bahasa Pemrograman Favorit</h1>
+
+  <div class="card js-card card">
+    <div class="icon js">JS</div>
+    <div class="language-title">JavaScript</div>
+    <div class="stars">⭐⭐⭐⭐⭐ (5.0)</div>
+    <div class="description">Bahasa utama untuk web modern. Bisa dipakai di frontend, backend, bahkan desktop & mobile apps.</div>
+    <ul>
+      <li>Frontend (React, Vue, Svelte)</li>
+      <li>Backend (Node.js, Express)</li>
+      <li>Game & App (Electron, React Native)</li>
+    </ul>
+  </div>
+
+  <div class="card py-card card">
+    <div class="icon py">Py</div>
+    <div class="language-title">Python</div>
+    <div class="stars">⭐⭐⭐⭐ (4.0)</div>
+    <div class="description">Bahasa serbaguna yang cocok buat pemula dan AI. Sintaksnya simpel dan kuat di data & machine learning.</div>
+    <ul>
+      <li>Machine Learning (TensorFlow, PyTorch)</li>
+      <li>Web Dev (Django, Flask)</li>
+      <li>Automation & Scripting</li>
+    </ul>
+  </div>
+
+  <div class="card kt-card card">
+    <div class="icon kt">Kt</div>
+    <div class="language-title">Kotlin</div>
+    <div class="stars">⭐⭐⭐⭐½ (4.5)</div>
+    <div class="description">Bahasa resmi Android modern. Sintaksnya clean dan powerful, integrasi penuh dengan Java.</div>
+    <ul>
+      <li>Android Apps</li>
+      <li>Multiplatform (Kotlin Multiplatform)</li>
+      <li>Backend (Ktor)</li>
+    </ul>
+  </div>
+
+  <div class="card php-card card">
+    <div class="icon php">PHP</div>
+    <div class="language-title">PHP</div>
+    <div class="stars">⭐⭐⭐¾ (3.9)</div>
+    <div class="description">Bahasa lawas yang masih mendominasi backend web. Cepat, simple, dan banyak support hosting.</div>
+    <ul>
+      <li>Web Server (Laravel, CodeIgniter)</li>
+      <li>CMS (WordPress, Joomla)</li>
+    </ul>
+  </div>
+
+  <div class="card cpp-card card">
+    <div class="icon cpp">C++</div>
+    <div class="language-title">C++</div>
+    <div class="stars">⭐⭐⭐⭐⭐ (5.0)</div>
+    <div class="description">Bahasa powerful buat performa tinggi. Dipakai buat OS, game engine, dan sistem berat.</div>
+    <ul>
+      <li>Game Engine (Unreal, custom engine)</li>
+      <li>System Programming</li>
+      <li>Competitive Programming</li>
+    </ul>
+  </div>
+
+  <a href="index.html" class="btn-back">⬅ Back To Main Menu</a>
+
+  <script>
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        cards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>

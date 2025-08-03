@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Social Media</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d0d0d;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 30px 20px 70px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 100%; /* Aspect ratio 1:1 */
+      margin-bottom: 10px;
+    }
+
+    .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 0 15px orange;
+    }
+
+    .video-controls {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .video-controls button {
+      padding: 8px 16px;
+      margin: 5px;
+      background-color: orange;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px orange;
+    }
+
+    .card {
+      background-color: #1a1a1a;
+      border-radius: 12px;
+      padding: 20px;
+      transition: 0.3s ease-in-out;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .card.active .account-name {
+      color: orange;
+      text-shadow: 0 0 12px orange, 0 0 20px orange;
+      font-size: 1.8em;
+      transition: 0.3s ease-in-out;
+    }
+
+    .card:not(.active) .account-name {
+      opacity: 0.7;
+      transform: scale(0.95);
+      transition: 0.3s ease-in-out;
+    }
+
+    .account-name {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .followers {
+      font-size: 1em;
+      color: #ccc;
+    }
+
+    .visit-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: orange;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      color: #000;
+      cursor: pointer;
+      box-shadow: 0 0 10px orange;
+      transition: 0.2s;
+    }
+
+    .visit-btn:hover {
+      background-color: #ffbb33;
+    }
+
+    .back-btn {
+      background: transparent;
+      color: orange;
+      font-weight: bold;
+      border: 2px solid orange;
+      padding: 10px 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px orange;
+      cursor: pointer;
+      display: block;
+      margin: 40px auto 10px;
+      font-size: 1em;
+      text-shadow: 0 0 10px orange;
+    }
+
+    @media screen and (max-width: 500px) {
+      .card {
+        padding: 16px;
+      }
+
+      .account-name {
+        font-size: 1.3em;
+      }
+
+      .visit-btn {
+        padding: 8px 16px;
+      }
+
+      .video-controls button {
+        padding: 6px 12px;
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- VIDEO AREA -->
+    <div class="video-wrapper">
+      <video id="myVideo" src="https://files.catbox.moe/d801yf.mp4" loop></video>
+    </div>
+    <div class="video-controls">
+      <button onclick="document.getElementById('myVideo').play()">▶️ Play</button>
+      <button onclick="document.getElementById('myVideo').pause()">⏸️ Pause</button>
+    </div>
+
+    <!-- SOCIAL MEDIA CARDS -->
+    <div class="card" onclick="activate(this)">
+      <div class="account-name">TikTok: @3008yo</div>
+      <div class="followers">Followers: 0</div>
+      <button class="visit-btn" onclick="event.stopPropagation(); window.open('https://www.tiktok.com/@3008yo', '_blank')">Kunjungin Akun Ini</button>
+    </div>
+
+    <div class="card" onclick="activate(this)">
+      <div class="account-name">Instagram: ptr</div>
+      <div class="followers">Followers: 22</div>
+      <button class="visit-btn" onclick="event.stopPropagation(); window.open('https://instagram.com/_1411xv', '_blank')">Kunjungin Akun Ini</button>
+    </div>
+
+    <div class="card" onclick="activate(this)">
+      <div class="account-name">YouTube: Riview Script Aja🗿</div>
+      <div class="followers">Subscribers: 9</div>
+      <button class="visit-btn" onclick="event.stopPropagation(); window.open('https://youtube.com/@kangripiw19', '_blank')">Kunjungin Akun Ini</button>
+    </div>
+
+    <div class="card" onclick="activate(this)">
+      <div class="account-name">Telegram: t.me/Shadow</div>
+      <div class="followers"> </div>
+      <button class="visit-btn" onclick="event.stopPropagation(); window.open('https://t.me/unknownsUser9', '_blank')">Kunjungin Akun Ini</button>
+    </div>
+  </div>
+
+  <!-- BACK TO MENU -->
+  <button onclick="window.location.href='index.html'" class="back-btn">⬅️ Back to Main Menu</button>
+
+  <script>
+    function activate(card) {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>

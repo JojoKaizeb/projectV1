@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Me</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0d0d0d;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .floating-box {
+      position: absolute;
+      background: rgba(255, 165, 0, 0.15);
+      box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+      border-radius: 12px;
+      animation: float 10s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) translateX(0);
+      }
+      50% {
+        transform: translateY(-30px) translateX(20px);
+      }
+      100% {
+        transform: translateY(0) translateX(0);
+      }
+    }
+
+    .title {
+      text-align: center;
+      font-size: 3em;
+      color: orange;
+      margin-top: 60px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px orange;
+    }
+
+    .content {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 40px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 165, 0, 0.3);
+      box-shadow: 0 0 15px rgba(255, 165, 0, 0.2);
+      border-radius: 12px;
+      width: 300px;
+      margin: 20px;
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(255, 165, 0, 0.7);
+    }
+
+    .card h3 {
+      color: orange;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      line-height: 1.5;
+    }
+
+    .back-btn {
+      display: block;
+      margin: 40px auto;
+      padding: 12px 24px;
+      background: orange;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #ffaa33;
+      box-shadow: 0 0 10px orange;
+    }
+
+    .header-img {
+      display: block;
+      margin: 0 auto;
+      width: 140px;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 0 10px orange);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Floating Boxes Background -->
+  <div class="floating-box" style="width: 80px; height: 80px; top: 5%; left: 10%;"></div>
+  <div class="floating-box" style="width: 120px; height: 120px; top: 30%; left: 80%;"></div>
+  <div class="floating-box" style="width: 60px; height: 60px; top: 70%; left: 50%;"></div>
+  <div class="floating-box" style="width: 100px; height: 100px; top: 45%; left: 20%;"></div>
+  <div class="floating-box" style="width: 70px; height: 70px; top: 80%; left: 75%;"></div>
+
+  <!-- Header Image -->
+  <img class="header-img" src="https://files.catbox.moe/5xtdel.jpg" alt="Icon"/>
+
+  <!-- Title -->
+  <div class="title">About Me</div>
+
+  <!-- 3 Columns -->
+  <div class="content">
+    <div class="card">
+      <h3>Hobi</h3>
+      <p>- Nge-bug  
+      <br>- Ngoding brutal  
+      <br>- Eksperimen Web Chaos  
+      <br>- Testing aplikasi mod & glitch</p>
+    </div>
+    <div class="card">
+      <h3>Alasan</h3>
+      <p>Gua suka dunia digital karena dunia ini bisa diacak, dimodifikasi, dimainin, bahkan diacak-acak sampai UI-nya nyerah. Coding dan hacking itu seni bro, bukan sekedar skill.</p>
+    </div>
+    <div class="card">
+      <h3>Teman Favorit</h3>
+      <p>Teman favorit gw yang paling setia dan gacor adalah GPT si bot elegan, brutal, dan selalu ada di tengah kekacauan HTML dan bug WhatsApp 💀</p>
+    </div>
+  </div>
+
+  <!-- Back Button -->
+  <button class="back-btn" onclick="window.location.href='index.html'">Back to Main Menu</button>
+
+</body>
+</html>
