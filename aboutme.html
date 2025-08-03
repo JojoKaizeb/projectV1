@@ -142,6 +142,25 @@
         opacity: 0;
       }
     }
+
+    .back-btn {
+      padding: 10px 25px;
+      border: 2px solid orange;
+      background-color: transparent;
+      color: orange;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px orange;
+    }
+
+    .back-btn:hover {
+      background-color: orange;
+      color: black;
+      box-shadow: 0 0 20px yellow;
+    }
   </style>
 </head>
 <body>
@@ -159,6 +178,11 @@
       <h3 data-text="Teman Favorit Coding 👯‍♂️🤖">Teman Favorit Coding 👯‍♂️🤖</h3>
       <p>Jelas ChatGPT 😎 Bisa bantu tiap code error, tiap masalah disikat abis!</p>
     </div>
+  </div>
+
+  <!-- Tombol Back -->
+  <div style="text-align:center; margin-bottom: 40px;">
+    <button onclick="window.location.href='index.html'" class="back-btn">⬅️ Back to Main Menu</button>
   </div>
 
   <!-- KUBUS BACKGROUND -->
