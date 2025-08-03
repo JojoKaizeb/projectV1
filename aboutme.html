@@ -1,145 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About Me</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
-      background: #0d0d0d;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #fff;
-      overflow-x: hidden;
+      background-color: #0d0d0d;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      filter: blur(5px);
+      animation: clearBlur 1s ease forwards;
     }
 
-    .floating-box {
-      position: absolute;
-      background: rgba(255, 165, 0, 0.15);
-      box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+    @keyframes clearBlur {
+      to {
+        filter: blur(0);
+      }
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+      color: orange;
+      text-shadow: 0 0 15px orange;
+      z-index: 2;
+      position: relative;
+      opacity: 0;
+      transform: translateX(-50px) scale(0.8);
+      animation: enterAnim 1s ease forwards;
+      animation-delay: 1s;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .box {
+      background-color: #1a1a1a;
+      padding: 20px;
       border-radius: 12px;
-      animation: float 10s linear infinite;
+      box-shadow: 0 0 10px rgba(255, 165, 0, 0.1);
+      transition: 0.3s ease;
+      cursor: pointer;
+      text-align: center;
+      position: relative;
+      opacity: 0;
+      transform: translateX(-50px) scale(0.8);
+      animation: enterAnim 1s ease forwards;
+      animation-delay: 1.2s;
+    }
+
+    .box:nth-child(2) {
+      animation-delay: 1.4s;
+    }
+
+    .box:nth-child(3) {
+      animation-delay: 1.6s;
+    }
+
+    @keyframes enterAnim {
+      to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+
+    .box.active {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px orange;
+      color: yellow;
+      text-shadow: 0 0 10px yellow;
+    }
+
+    .box:not(.active) h3 {
+      position: relative;
+      display: inline-block;
+      animation: glitch 2s infinite;
+    }
+
+    .box:not(.active) h3::before,
+    .box:not(.active) h3::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      color: #00ff66;
+      text-shadow: 1px 0 #00ff66;
+      animation: glitch 2s infinite;
+      opacity: 0.6;
+    }
+
+    .box:not(.active) h3::after {
+      color: #ffff00;
+      text-shadow: -1px 0 #ffff00;
+      animation-delay: 1s;
+    }
+
+    @keyframes glitch {
+      0% { transform: none; opacity: 0.8; }
+      20% { transform: translateX(1px); }
+      40% { transform: translateX(-1px); }
+      60% { transform: translateY(1px); }
+      80% { transform: translateY(-1px); }
+      100% { transform: none; opacity: 0.8; }
+    }
+
+    .cube {
+      width: 15px;
+      height: 15px;
+      background: orange;
+      position: absolute;
+      top: -20px;
+      animation: float 12s linear infinite;
+      opacity: 0.4;
+      box-shadow: 0 0 10px orange;
     }
 
     @keyframes float {
       0% {
-        transform: translateY(0) translateX(0);
-      }
-      50% {
-        transform: translateY(-30px) translateX(20px);
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.4;
       }
       100% {
-        transform: translateY(0) translateX(0);
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
       }
     }
-
-    .title {
-      text-align: center;
-      font-size: 3em;
-      color: orange;
-      margin-top: 60px;
-      margin-bottom: 20px;
-      text-shadow: 0 0 10px orange;
-    }
-
-    .content {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      padding: 40px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 165, 0, 0.3);
-      box-shadow: 0 0 15px rgba(255, 165, 0, 0.2);
-      border-radius: 12px;
-      width: 300px;
-      margin: 20px;
-      padding: 20px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(255, 165, 0, 0.7);
-    }
-
-    .card h3 {
-      color: orange;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      line-height: 1.5;
-    }
-
-    .back-btn {
-      display: block;
-      margin: 40px auto;
-      padding: 12px 24px;
-      background: orange;
-      color: #000;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.1em;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .back-btn:hover {
-      background: #ffaa33;
-      box-shadow: 0 0 10px orange;
-    }
-
-    .header-img {
-      display: block;
-      margin: 0 auto;
-      width: 140px;
-      margin-bottom: 10px;
-      filter: drop-shadow(0 0 10px orange);
-    }
-
   </style>
 </head>
 <body>
-
-  <!-- Floating Boxes Background -->
-  <div class="floating-box" style="width: 80px; height: 80px; top: 5%; left: 10%;"></div>
-  <div class="floating-box" style="width: 120px; height: 120px; top: 30%; left: 80%;"></div>
-  <div class="floating-box" style="width: 60px; height: 60px; top: 70%; left: 50%;"></div>
-  <div class="floating-box" style="width: 100px; height: 100px; top: 45%; left: 20%;"></div>
-  <div class="floating-box" style="width: 70px; height: 70px; top: 80%; left: 75%;"></div>
-
-  <!-- Header Image -->
-  <img class="header-img" src="https://files.catbox.moe/5xtdel.jpg" alt="Icon"/>
-
-  <!-- Title -->
-  <div class="title">About Me</div>
-
-  <!-- 3 Columns -->
-  <div class="content">
-    <div class="card">
-      <h3>Hobi</h3>
-      <p>- Nge-bug  
-      <br>- Ngoding brutal  
-      <br>- Eksperimen Web Chaos  
-      <br>- Testing aplikasi mod & glitch</p>
+  <h1>About Me</h1>
+  <div class="container">
+    <div class="box" onclick="activate(this)">
+      <h3 data-text="Hobi 🎮⚽💻">Hobi 🎮⚽💻</h3>
+      <p>Coding, main bola, main game. Kadang ngoding sambil nendang bug 😎</p>
     </div>
-    <div class="card">
-      <h3>Alasan</h3>
-      <p>Gua suka dunia digital karena dunia ini bisa diacak, dimodifikasi, dimainin, bahkan diacak-acak sampai UI-nya nyerah. Coding dan hacking itu seni bro, bukan sekedar skill.</p>
+    <div class="box" onclick="activate(this)">
+      <h3 data-text="Alasan Masuk Dunia Coding 💥🧠">Alasan Masuk Dunia Coding 💥🧠</h3>
+      <p>Karena dulu sempat kena virus malware 💀 dan dari situ aku mulai tertarik buat paham sistem 😤</p>
     </div>
-    <div class="card">
-      <h3>Teman Favorit</h3>
-      <p>Teman favorit gw yang paling setia dan gacor adalah GPT si bot elegan, brutal, dan selalu ada di tengah kekacauan HTML dan bug WhatsApp 💀</p>
+    <div class="box" onclick="activate(this)">
+      <h3 data-text="Teman Favorit Coding 👯‍♂️🤖">Teman Favorit Coding 👯‍♂️🤖</h3>
+      <p>Jelas ChatGPT 😎 Bisa bantu tiap code error, tiap masalah disikat abis!</p>
     </div>
   </div>
 
-  <!-- Back Button -->
-  <button class="back-btn" onclick="window.location.href='index.html'">Back to Main Menu</button>
+  <!-- KUBUS BACKGROUND -->
+  <script>
+    for (let i = 0; i < 30; i++) {
+      let cube = document.createElement("div");
+      cube.classList.add("cube");
+      cube.style.left = `${Math.random() * 100}%`;
+      cube.style.animationDuration = `${5 + Math.random() * 10}s`;
+      cube.style.width = cube.style.height = `${8 + Math.random() * 10}px`;
+      document.body.appendChild(cube);
+    }
 
+    function activate(element) {
+      const boxes = document.querySelectorAll('.box');
+      boxes.forEach(box => box.classList.remove('active'));
+      element.classList.add('active');
+    }
+  </script>
 </body>
 </html>
