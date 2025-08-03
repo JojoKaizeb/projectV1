@@ -25,7 +25,7 @@
     .video-wrapper {
       position: relative;
       width: 100%;
-      padding-top: 100%; /* Aspect ratio 1:1 */
+      padding-top: 100%;
       margin-bottom: 10px;
     }
 
@@ -82,6 +82,14 @@
       opacity: 0.7;
       transform: scale(0.95);
       transition: 0.3s ease-in-out;
+    }
+
+    .card-logo {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 0 6px orange);
     }
 
     .account-name {
@@ -162,24 +170,28 @@
 
     <!-- SOCIAL MEDIA CARDS -->
     <div class="card" onclick="activate(this)">
+      <img src="https://files.catbox.moe/5gefm6.jpg" class="card-logo" alt="TikTok Logo" />
       <div class="account-name">TikTok: @3008yo</div>
       <div class="followers">Followers: 0</div>
       <button class="visit-btn" onclick="event.stopPropagation(); window.open('https://www.tiktok.com/@3008yo', '_blank')">Kunjungin Akun Ini</button>
     </div>
 
     <div class="card" onclick="activate(this)">
+      <img src="https://files.catbox.moe/moljg8.jpg" class="card-logo" alt="Instagram Logo" />
       <div class="account-name">Instagram: ptr</div>
       <div class="followers">Followers: 22</div>
       <button class="visit-btn" onclick="event.stopPropagation(); window.open('https://instagram.com/_1411xv', '_blank')">Kunjungin Akun Ini</button>
     </div>
 
     <div class="card" onclick="activate(this)">
+      <img src="https://files.catbox.moe/gefn7t.jpg" class="card-logo" alt="YouTube Logo" />
       <div class="account-name">YouTube: Riview Script Aja🗿</div>
       <div class="followers">Subscribers: 9</div>
       <button class="visit-btn" onclick="event.stopPropagation(); window.open('https://youtube.com/@kangripiw19', '_blank')">Kunjungin Akun Ini</button>
     </div>
 
     <div class="card" onclick="activate(this)">
+      <img src="https://files.catbox.moe/kbgreg.jpg" class="card-logo" alt="Telegram Logo" />
       <div class="account-name">Telegram: t.me/Shadow</div>
       <div class="followers"> </div>
       <button class="visit-btn" onclick="event.stopPropagation(); window.open('https://t.me/unknownsUser9', '_blank')">Kunjungin Akun Ini</button>
